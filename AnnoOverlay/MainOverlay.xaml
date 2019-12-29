@@ -1,0 +1,223 @@
+﻿<Window x:Class="AnnoOverlay.MainOverlay"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
+        xmlns:local="clr-namespace:AnnoOverlay" xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d" Style="{Binding Mode=OneWay, Source={StaticResource Style_MainOverlay}}"
+        Title="Anno 1800 Overlay" Icon="Resources/abakus.ico" Height="665" Width="340" Topmost="True" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ShowInTaskbar="False" MouseDown="Window_MouseDown">
+    <Window.Resources>
+        <local:DoubleToVisibilityConverter x:Key="ToVisibility" />
+        <local:DoubleToPercentConverter x:Key="ToPercent" />
+        <local:DoubleToIntConverter x:Key="ToInt" />
+        <local:DoubleToColorConverter x:Key="ToColor" />
+        <local:GuidToImageSourceConverter x:Key="ToImage"/>
+        <local:ScaleToScreenConverter x:Key="ScaleToScreen"/>
+        <system:Double x:Key="IconSize">74</system:Double>
+        <system:Double x:Key="Icon_Population_Size">100</system:Double>
+        <system:Double x:Key="Icon_IslandPopulation_Size">48</system:Double>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="4*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="102*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20*"/>
+            <ColumnDefinition Width="300*"/>
+            <ColumnDefinition Width="20*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <Label x:Name="Label_Title" Content="Warenbedarfsrechner" Grid.Column="1" Grid.Row="1" FontFamily="Resources/#Meta Serif Offc Pro Medium" FontSize="18" HorizontalAlignment="Center" Foreground="#FFF8E0C6" VerticalAlignment="Bottom" />
+        <Button x:Name="Button_Settings" Content="&#xE713;" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" FontFamily="Segoe MDL2 Assets" FontSize="18" Width="40" Style="{DynamicResource Style_MainOverlay_SettingsBtn}" HorizontalAlignment="Left" Click="Button_Settings_Click" Margin="0,5"/>
+        <Button x:Name="Button_Close" Grid.Column="1" Grid.Row="1" Height="29" Width="29" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Close_Click" Style="{DynamicResource Button_Close_Style}" Opacity="0.81"/>
+
+        <!-- Content Page -->
+        <ItemsControl x:Name="ItemsControl_Content" Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Parameters.Products}" Visibility="Visible">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="{Binding Source={StaticResource IconSize}, Converter={StaticResource ScaleToScreen}}" Width="{Binding Source={StaticResource IconSize}, Converter={StaticResource ScaleToScreen}}" Visibility="{Binding Amount, Converter={StaticResource ToVisibility}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*"/>
+                            <ColumnDefinition Width="43*" />
+                            <ColumnDefinition Width="10*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="8*" />
+                            <RowDefinition Height="42*" />
+                            <RowDefinition Height="17*" />
+                            <RowDefinition Height="4*" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Background -->
+                        <Image Grid.ColumnSpan="3" Grid.RowSpan="4" Source="Resources/btn_goods_normal_0.png" Margin="0"/>
+                        <Image Grid.ColumnSpan="3" Grid.RowSpan="4" Source="Resources/btn_goods_traded_0.png" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        
+                        <!-- Display -->
+                        <Image Grid.Column="1" Grid.Row="1" Source="{Binding Guid, Converter={StaticResource ToImage}}" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Amount, Converter={StaticResource ToInt}}" FontFamily="Resources/#Meta Serif Offc Pro Medium" Foreground="#FF9C7E5A" VerticalAlignment="Bottom" FontSize="16"/>
+                        
+                        <!-- Bar -->
+                        <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="4*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*" />
+                                <RowDefinition Height="58*" />
+                                <RowDefinition Height="5*" />
+                            </Grid.RowDefinitions>
+                            
+                            <Rectangle Grid.Row="1" Grid.Column="1" Fill="#FF41A623" RadiusY="1" RadiusX="1" Height="{Binding Amount, Converter={StaticResource ToPercent}}" VerticalAlignment="Bottom"/>
+                        
+                        </Grid>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+
+        <!-- Settings Page -->
+        <Grid x:Name="Grid_Settings" Grid.Column="1" Grid.Row="4"  Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Settings & Features -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Einstellungen" FontFamily="Resources/#Meta Serif Offc Pro Medium" HorizontalAlignment="Center" Foreground="#FF4F300F"/>
+                <Button x:Name="Button_CompactOverlay" Grid.Column="0" Grid.Row="1" Content="Kompaktes Overlay" Style="{DynamicResource Button_Text60_Style}" Click="Button_CompactOverlay_Click"/>
+                <Button x:Name="Button_ColorConverter" Grid.Column="1" Grid.Row="1" Content="Auslastung Farbcodiert" Style="{DynamicResource Button_Text60_Style}" Click="Button_ColorConverter_Click" IsEnabled="False"/>
+                <Button x:Name="Button_FullHouse" Grid.Column="0" Grid.Row="2" Content="Maximalbevölkerung" Style="{DynamicResource Button_Text60_Style}" Click="Button_FullHouse_Click"/>
+                <Button x:Name="Button_DevTools" Grid.Column="0" Grid.Row="3" Content="Entwickleroptionen" Style="{DynamicResource Button_Text60_Style}" IsEnabled="False" Click="Button_DevTools_Click"/>
+            </Grid>
+            
+            <!-- Island Population used for calculation -->
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="Label_FullHouse" Grid.Row="0" Content="Aktuelle Bevölkerung" FontFamily="Resources/#Meta Serif Offc Pro Medium" Foreground="#FF4F300F" HorizontalAlignment="Center"/>
+
+                <ItemsControl x:Name="ItemsControl_Population" Grid.Row="1" ItemsSource="{Binding Parameters.PopulationLevels}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="{Binding Source={StaticResource Icon_Population_Size}, Converter={StaticResource ScaleToScreen}}"  Visibility="{Binding Amount, Converter={StaticResource ToVisibility}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="3*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Source="{Binding Guid, Converter={StaticResource ToImage}}"/>
+                                <Label Grid.Column="1" Content="{Binding Amount}" FontFamily="Resources/#Meta Offc Pro"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF4F300F" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+                
+            </Grid>
+            
+            <!-- Island links -->
+            <Grid Grid.Row="2" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="19*" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Inseln zuordnen" FontFamily="Resources/#Meta Serif Offc Pro Medium" HorizontalAlignment="Center" Foreground="#FF4F300F"/>
+                <Button x:Name="Button_RelinkIslands" Grid.Row="1" Grid.ColumnSpan="2" Content="Neu zuordnen" Style="{DynamicResource Button_Text60_Style}" Click="Button_RelinkIslands_Click"/>
+
+                <!--<Label Grid.Row="2" Grid.Column="0" Content="Debug" FontFamily="Resources/#Meta Offc Pro"  VerticalAlignment="Center" Foreground="#FF4F300F" />
+                <Label Grid.Row="2" Grid.Column="1" Content="{Binding Islands[0].PopulationLevels[0].Guid}" FontFamily="Resources/#Meta Offc Pro"  VerticalAlignment="Center" Foreground="#FF4F300F" />-->
+                
+                <Label Grid.Row="3" Grid.Column="0" Content="Aktive Insel ID" FontFamily="Resources/#Meta Offc Pro"  VerticalAlignment="Center" Foreground="#FF4F300F" />
+                <Label Grid.Row="3" Grid.Column="1" Content="{Binding ActiveIslandId}" FontFamily="Resources/#Meta Offc Pro"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF4F300F" />
+
+                <ListBox x:Name="ListBox_Islands" Grid.Row="4" Grid.ColumnSpan="2" 
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                         Background="{x:Null}" ItemsSource="{Binding Islands}"
+                         BorderBrush="#FF4F300F" Foreground="#FF4F300F" Visibility="Collapsed" SelectionChanged="ListBox_Islands_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <ItemsControl x:Name="ItemsControl_IslandLinkPopulation" ItemsSource="{Binding PopulationLevels}" Tag="{Binding Offset}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="{Binding Source={StaticResource Icon_IslandPopulation_Size}, Converter={StaticResource ScaleToScreen}}"  Visibility="{Binding Amount, Converter={StaticResource ToVisibility}}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="2*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Image Source="{Binding Guid, Converter={StaticResource ToImage}}"/>
+                                            <Label Grid.Column="1" Content="{Binding Amount}" FontFamily="Resources/#Meta Offc Pro"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FF4F300F" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>                
+            </Grid>
+            
+            <!-- How To -->
+            <StackPanel Grid.Row="3" x:Name="StackPanel_HowTo" Visibility="Visible">
+                <Label x:Name="Label_HowToTitle" Content="Anleitung" FontFamily="Resources/#Meta Serif Offc Pro Medium" Foreground="#FF4F300F" HorizontalAlignment="Center" />
+                <TextBlock x:Name="TextBlock_HowToText" FontFamily="Resources/Resources/#Meta Offc Pro" Foreground="#FF4F300F" HorizontalAlignment="Center">
+                            Unter Umständen kann die automatische Zuordnung <LineBreak />
+                            der Inseln falsch sein. In diesem Fall muss sie manuell <LineBreak />
+                            angepasst werden. <LineBreak />
+                            <LineBreak />
+                            1) Im Spiel eine Insel mit bekannter Bevölkerung <LineBreak />
+                            aufsuchen und <LineBreak />
+                            2) Jetzt die Inseln "Neu zuordnen". <LineBreak />
+                            3) Die Bevölkerung aus der Liste auswählen, die mit <LineBreak /> der im Spiel angezeigten Bevölkerung übereinstimmt. <LineBreak />
+                            <LineBreak />
+                            *) Die Zuordnung muss in allen Regionen durchgeführt <LineBreak /> werden.
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</Window>

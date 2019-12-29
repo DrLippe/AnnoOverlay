@@ -1,0 +1,138 @@
+﻿<Window x:Class="AnnoOverlay.DevTools"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnnoOverlay"
+        mc:Ignorable="d"
+        Title="Entwickleroptionen" Height="450" Width="800" Icon="Resources/abakus.ico" Topmost="True" Closing="Window_Closing">
+    <Grid>
+        <TabControl>
+            <TabItem Header="TabItem">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="Manuelle Eingabe">
+                        
+                    </GroupBox>
+                    
+                    <GroupBox Header="XML Erstellung" Grid.Row="0" Grid.Column="2" Grid.RowSpan="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="2*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Content="Version:"/>
+                            <Label Grid.Row="0" Grid.Column="1" Content="{Binding Settings.GameAddresses.GameVersion}"/>
+                            
+                            <Label Grid.Row="1" Grid.Column="0" Content="Insel Links:"/>
+                            <ListView Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Settings.IslandLinkOffsets}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+                            
+                            <Label Grid.Row="2" Grid.Column="0" Content="Insel Bevölkerung:"/>
+                            <ListView Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Settings.GameAddresses.IslandPopulationPointer}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding StringFormat={}{0:X}}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                            
+                            <Label Grid.Row="3" Grid.Column="0" Content="Insel ID:"/>
+                            <ListView Grid.Row="3" Grid.Column="1" ItemsSource="{Binding Settings.GameAddresses.IslandIdPointer}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding StringFormat={}{0:X}}"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+
+                            <Label Grid.Row="4" Grid.Column="0" Content="Insel Links:"/>
+                            <ListView Grid.Row="4" Grid.Column="1" ItemsSource="{Binding Settings.GameAddresses.IslandPopulationPosPtr}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                <ListView.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel/>
+                                    </ItemsPanelTemplate>
+                                </ListView.ItemsPanel>
+                            </ListView>
+
+                            <Button Content="Erstellen" Grid.Row="10" Grid.ColumnSpan="2" Margin="20,5"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="IslandLinks">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="31*"/>
+                        <RowDefinition Height="360*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Content="Alte Welt"/>
+                    <Label Grid.Column="1" Content="Kap Trelawney"/>
+                    <Label Grid.Column="2" Content="Neue Welt"/>
+                    <Label Grid.Column="3" Content="Arktis"/>
+
+                    <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[0]}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[1]}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView Grid.Column="2" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[2]}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView Grid.Column="3" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[3]}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

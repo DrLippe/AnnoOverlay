@@ -1,0 +1,228 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AnnoOverlay">
+    <!-- Converters -->
+
+    <Style x:Key="Style_MainOverlay" TargetType="{x:Type Window}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Cursor" Value="annoCursor.ani"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid>
+                        <!-- Shadow -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="39*"/>
+                                <RowDefinition Height="593*"/>
+                                <RowDefinition Height="33*"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="shw_om_header.png" VerticalAlignment="Top" Stretch="UniformToFill"/>
+                            <Image Grid.Row="1" Source="shw_om_body.png" VerticalAlignment="Center" Stretch="Fill"/>
+                            <Image Grid.Row="2" Source="shw_om_footer.png" VerticalAlignment="Bottom" Stretch="UniformToFill"/>
+                        </Grid>
+                        <!-- Background -->
+                        <Grid x:Name="BgrGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="320*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="75*"/>
+                                <RowDefinition Height="570*"/>
+                                <RowDefinition Height="15*"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Source="bgr_om_header_purple.png" VerticalAlignment="Top" Stretch="Uniform" Panel.ZIndex="1"/>
+                            <Image Grid.Column="1" Grid.Row="2" Source="bgr_om_body.png" VerticalAlignment="Bottom" Stretch="UniformToFill"/>
+                        </Grid>
+                        <ContentPresenter/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ClosingWindow_Style" TargetType="{x:Type Window}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Cursor" Value="annoCursor.ani"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Grid>
+                        <!-- Shadow -->
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="39"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="33"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="shw_om_header.png" VerticalAlignment="Top" Stretch="UniformToFill" HorizontalAlignment="Center"/>
+                            <Image Grid.Row="1" Source="shw_om_body.png" VerticalAlignment="Center" Stretch="Fill" HorizontalAlignment="Center"/>
+                            <Image Grid.Row="2" Source="shw_om_footer.png" VerticalAlignment="Bottom" Stretch="UniformToFill" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <!-- Background -->
+                        <Grid x:Name="BgrGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="320*"/>
+                                <ColumnDefinition Width="10*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*"/>
+                                <RowDefinition Height="75*"/>
+                                <RowDefinition Height="292*"/>
+                                <RowDefinition Height="20*"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Source="bgr_om_header_purple.png" VerticalAlignment="Top" Stretch="Uniform" Panel.ZIndex="1" HorizontalAlignment="Center"/>
+                            <Image Grid.Column="1" Grid.Row="2" Source="bgr_om_body.png" VerticalAlignment="Bottom" Stretch="UniformToFill" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <ContentPresenter/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- Settings Button -->
+    <Style x:Key="Style_MainOverlay_SettingsBtn" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="btn_icon80_purple_0.png" Stretch="Uniform"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Foreground" Value="#FFF8E0C6"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+                            
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="btn_icon80_purple_hover_0.png" Stretch="Uniform"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="btn_icon80_purple_onclick_0.png" Stretch="Uniform"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="#FF948781"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Button_Text60_Style" TargetType="{x:Type Button}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="btn_text60_purple_0.png" Stretch="Uniform"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="BorderBrush" Value="{x:Null}"/>
+        <Setter Property="Foreground" Value="#FFF8E0C6"/>
+        <Setter Property="FontFamily" Value="/AnnoOverlay;component/Resources/#Meta Serif Offc Pro Medium"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDefaulted" Value="true">
+
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="btn_text60_hover_0.png" Stretch="Uniform"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="btn_text60_onclick_0.png" Stretch="Uniform"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Foreground" Value="#FF948781"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="border">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="btn_text60_disabled_0.png" Stretch="Uniform"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Button_Close_Style" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid x:Name="grid" SnapsToDevicePixels="true">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="btn_checkbox_normal.png"/>
+                        </Grid.Background>
+                        <Label x:Name="content" Margin="5">
+                            <Label.Background>
+                                <ImageBrush ImageSource="icon_cross_small.png"/>
+                            </Label.Background>
+                        </Label>
+                        <Label x:Name="hover"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="hover">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="btn_checkbox_hover.png"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="hover">
+                                <Setter.Value>
+                                    <ImageBrush ImageSource="btn_checkbox_click.png"/>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
