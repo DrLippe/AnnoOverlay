@@ -3,21 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:AnnoOverlay"
+        xmlns:local="clr-namespace:AnnoOverlay" xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Anno 1800 Overlay" ShowInTaskbar="False" Height="200" Width="220" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown" Cursor="Resources/annoCursor.ani">
+        Title="Anno 1800 Overlay" ShowInTaskbar="False" Height="200" Width="220" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown" Cursor="Resources/annoCursor.ani" Closing="Window_Closing">
     <Window.Resources>
         <local:DoubleToVisibilityConverter x:Key="ToVisibility" />
         <local:DoubleToPercentageConverter x:Key="ToPercent" />
         <local:DoubleToIntConverter x:Key="ToInt" />
         <local:DoubleToColorConverter x:Key="ToColor" />
         <local:GuidToImageSourceConverter x:Key="ToImage"/>
+        <local:ScaleToScreenConverter x:Key="ScaleToScreen"/>
+        <system:Double x:Key="IconHeight">30</system:Double>
+        <system:Double x:Key="IconWidth">50</system:Double>
     </Window.Resources>
     <Grid>
         <ItemsControl ItemsSource="{Binding Parameters.Products}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="30" Width="50" Margin="2" Visibility="{Binding Amount, Converter={StaticResource ToVisibility}}">
+                    <Grid Height="{Binding Source={StaticResource IconHeight}, Converter={StaticResource ScaleToScreen}}" Width="{Binding Source={StaticResource IconWidth}, Converter={StaticResource ScaleToScreen}}" Margin="2" Visibility="{Binding Amount, Converter={StaticResource ToVisibility}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="2*"/>

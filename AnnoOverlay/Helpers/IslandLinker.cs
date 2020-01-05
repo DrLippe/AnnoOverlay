@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace AnnoOverlay
 {
@@ -60,7 +58,7 @@ namespace AnnoOverlay
                 int islandOffset = 0x108;
                 int inhabitantOffset = 0x04;
 
-                while(islandOffset < 0x608)
+                while (islandOffset < 0x608)
                 {
                     offsets[4] = islandOffset;
 

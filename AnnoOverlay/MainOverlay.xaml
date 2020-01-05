@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"  
         xmlns:local="clr-namespace:AnnoOverlay" xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d" Style="{Binding Mode=OneWay, Source={StaticResource Style_MainOverlay}}"
-        Title="Anno 1800 Overlay" Icon="Resources/abakus.ico" Height="665" Width="340" Topmost="True" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ShowInTaskbar="False" MouseDown="Window_MouseDown">
+        Title="Anno 1800 Overlay" Icon="Resources/abakus.ico" Height="665" Width="340" Topmost="True" AllowsTransparency="True" WindowStyle="None" Background="{x:Null}" ShowInTaskbar="False" MouseDown="Window_MouseDown" Closing="Window_Closing">
     <Window.Resources>
         <local:DoubleToVisibilityConverter x:Key="ToVisibility" />
         <local:DoubleToPercentConverter x:Key="ToPercent" />
@@ -41,45 +41,7 @@
         <ItemsControl x:Name="ItemsControl_Content" Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Parameters.Products}" Visibility="Visible">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="{Binding Source={StaticResource IconSize}, Converter={StaticResource ScaleToScreen}}" Width="{Binding Source={StaticResource IconSize}, Converter={StaticResource ScaleToScreen}}" Visibility="{Binding Amount, Converter={StaticResource ToVisibility}}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*"/>
-                            <ColumnDefinition Width="43*" />
-                            <ColumnDefinition Width="10*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="8*" />
-                            <RowDefinition Height="42*" />
-                            <RowDefinition Height="17*" />
-                            <RowDefinition Height="4*" />
-                        </Grid.RowDefinitions>
-
-                        <!-- Background -->
-                        <Image Grid.ColumnSpan="3" Grid.RowSpan="4" Source="Resources/btn_goods_normal_0.png" Margin="0"/>
-                        <Image Grid.ColumnSpan="3" Grid.RowSpan="4" Source="Resources/btn_goods_traded_0.png" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                        
-                        <!-- Display -->
-                        <Image Grid.Column="1" Grid.Row="1" Source="{Binding Guid, Converter={StaticResource ToImage}}" />
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Amount, Converter={StaticResource ToInt}}" FontFamily="Resources/#Meta Serif Offc Pro Medium" Foreground="#FF9C7E5A" VerticalAlignment="Bottom" FontSize="16"/>
-                        
-                        <!-- Bar -->
-                        <Grid Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*"/>
-                                <ColumnDefinition Width="4*" />
-                                <ColumnDefinition Width="4*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="5*" />
-                                <RowDefinition Height="58*" />
-                                <RowDefinition Height="5*" />
-                            </Grid.RowDefinitions>
-                            
-                            <Rectangle Grid.Row="1" Grid.Column="1" Fill="#FF41A623" RadiusY="1" RadiusX="1" Height="{Binding Amount, Converter={StaticResource ToPercent}}" VerticalAlignment="Bottom"/>
-                        
-                        </Grid>
-                        
-                    </Grid>
+                    <Button Style="{StaticResource Button_Ware_Style}" Tag="{Binding Guid}" Click="Button_Click"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
             <ItemsControl.ItemsPanel>
@@ -112,10 +74,14 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Content="Einstellungen" FontFamily="Resources/#Meta Serif Offc Pro Medium" HorizontalAlignment="Center" Foreground="#FF4F300F"/>
+                
                 <Button x:Name="Button_CompactOverlay" Grid.Column="0" Grid.Row="1" Content="Kompaktes Overlay" Style="{DynamicResource Button_Text60_Style}" Click="Button_CompactOverlay_Click"/>
                 <Button x:Name="Button_ColorConverter" Grid.Column="1" Grid.Row="1" Content="Auslastung Farbcodiert" Style="{DynamicResource Button_Text60_Style}" Click="Button_ColorConverter_Click" IsEnabled="False"/>
+                
                 <Button x:Name="Button_FullHouse" Grid.Column="0" Grid.Row="2" Content="Maximalbevölkerung" Style="{DynamicResource Button_Text60_Style}" Click="Button_FullHouse_Click"/>
+                
                 <Button x:Name="Button_DevTools" Grid.Column="0" Grid.Row="3" Content="Entwickleroptionen" Style="{DynamicResource Button_Text60_Style}" IsEnabled="False" Click="Button_DevTools_Click"/>
+                <Button x:Name="Button_Hotkey" Grid.Column="1" Grid.Row="3" Content="{Binding Hotkey}" Style="{DynamicResource Button_Text60_Style}" IsEnabled="True" Click="Button_Hotkey_Click"/>
             </Grid>
             
             <!-- Island Population used for calculation -->

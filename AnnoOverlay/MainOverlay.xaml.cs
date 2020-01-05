@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace AnnoOverlay
 {
     /// <summary>
     /// Interaktionslogik für MainOverlay.xaml
     /// </summary>
-    public partial class MainOverlay : Window
+    public partial class MainOverlay : Window, IDisposable
     {
         private CancellationTokenSource tokenSource;
 
@@ -34,8 +27,11 @@ namespace AnnoOverlay
             Height = Scale.ToScreenHeight(665);
             Width = Scale.ToScreenHeight(340);
 
-            Top = SystemParameters.PrimaryScreenHeight - Height - 4;
-            Left = SystemParameters.PrimaryScreenWidth - Width - 11;
+            Top = Properties.Settings.Default.MainOverlay_Top;
+            Left = Properties.Settings.Default.MainOverlay_Left;
+
+            if (Properties.Settings.Default.MainOverlay_Visible)
+                Show();
 
             // Enable Developer mode
             string[] args = Environment.GetCommandLineArgs();
@@ -72,6 +68,7 @@ namespace AnnoOverlay
         {
             Hide();
             MainWindow.viewModel.OverlayIsVisible = false;
+            Properties.Settings.Default.MainOverlay_Visible = false;
         }
 
         private void Button_FullHouse_Click(object sender, RoutedEventArgs e)
@@ -123,11 +120,13 @@ namespace AnnoOverlay
             {
                 case true:
                     MainWindow.compactOverlay.Hide();
+                    Properties.Settings.Default.CompactOverlay_Visible = false;
                     Button_ColorConverter.IsEnabled = false;
                     break;
                 case false:
                     MainWindow.compactOverlay.Show();
                     Button_ColorConverter.IsEnabled = true;
+                    Properties.Settings.Default.CompactOverlay_Visible = true;
                     break;
             }
         }
@@ -135,11 +134,46 @@ namespace AnnoOverlay
         private void Button_ColorConverter_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.viewModel.ColorConverterEnabled = !MainWindow.viewModel.ColorConverterEnabled;
+            Properties.Settings.Default.CompactOverlay_ColorCoded = MainWindow.viewModel.ColorConverterEnabled;
         }
 
         private void Button_DevTools_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.devTools.Show();
+        }
+
+        private void Button_Hotkey_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.viewModel.Hotkey = "Warte auf Eingabe";
+            MainWindow.waitHotkey = true;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // This is under development!
+            if (!Environment.GetCommandLineArgs().Contains("/dev"))
+                return;
+
+            int guid = (int)((Button)sender).Tag;
+
+            if (!MainWindow.viewModel.IslandFactoryCount.ContainsKey(MainWindow.viewModel.ActiveIslandId))
+                MainWindow.viewModel.IslandFactoryCount.Add(MainWindow.viewModel.ActiveIslandId, new Dictionary<int, int>());
+            if (!MainWindow.viewModel.IslandFactoryCount[MainWindow.viewModel.ActiveIslandId].ContainsKey(guid))
+                MainWindow.viewModel.IslandFactoryCount[MainWindow.viewModel.ActiveIslandId].Add(guid, 0);
+            MainWindow.viewModel.IslandFactoryCount[MainWindow.viewModel.ActiveIslandId][guid] += 1;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Properties.Settings.Default.MainOverlay_Top = Top;
+            Properties.Settings.Default.MainOverlay_Left = Left;
+
+            Properties.Settings.Default.Save();
+        }
+
+        public void Dispose()
+        {
+            tokenSource.Dispose();
         }
     }
 }

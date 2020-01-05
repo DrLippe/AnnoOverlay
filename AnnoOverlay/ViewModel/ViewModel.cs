@@ -9,14 +9,17 @@ namespace AnnoOverlay
 
         public bool OverlayIsVisible { get; set; } = false;
 
-        public bool ColorConverterEnabled { get; set; } = false;
+        public bool ColorConverterEnabled { get; set; } = Properties.Settings.Default.CompactOverlay_ColorCoded;
 
         public int ActiveIslandId { get; set; }
 
         public bool UseFullHouse { get; set; } = false;
 
         public Dictionary<int, int> IslandLinks { get; set; }
+
         public Dictionary<int, int>[] IslandLinksByZone { get; set; }
+
+        public Dictionary<int, Dictionary<int, int>> IslandFactoryCount { get; set; }
 
         public Island[] Islands { get; set; }
 
@@ -24,6 +27,7 @@ namespace AnnoOverlay
 
         public Settings Settings { get; set; }
 
+        public string Hotkey { get; set; }
         #endregion
 
         public ViewModel()
@@ -34,6 +38,8 @@ namespace AnnoOverlay
 
     public class BaseViewModel : INotifyPropertyChanged
     {
+#pragma warning disable CS0067 // Das Ereignis "BaseViewModel.PropertyChanged" wird nie verwendet.
         public event PropertyChangedEventHandler PropertyChanged;
+#pragma warning restore CS0067 // Das Ereignis "BaseViewModel.PropertyChanged" wird nie verwendet.
     }
 }

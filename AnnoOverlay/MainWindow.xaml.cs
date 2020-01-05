@@ -1,32 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using AnnoOverlay.Helpers;
+using System;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using AnnoOverlay.Helpers;
 
 namespace AnnoOverlay
 {
     /// <summary>
     /// Interaktionslogik für MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IDisposable
     {
         // Windows
         public static MainOverlay mainOverlay = new MainOverlay();
         public static CompactOverlay compactOverlay = new CompactOverlay();
         public static ClosingWindow closingWindow = new ClosingWindow();
         public static DevTools devTools = new DevTools();
+
+        // Hotkey
+        private readonly LowLevelKeyboardListener keyboardListener;
+        public static bool waitHotkey = false;
 
         // ViewModel
         public static ViewModel viewModel = new ViewModel();
@@ -53,6 +46,27 @@ namespace AnnoOverlay
             InitializeComponent();
 
             islandReader.ScanThread.Start(tokenSource.Token);
+
+            // Hotkey
+            viewModel.Hotkey = Properties.Settings.Default.Hotkey;
+            keyboardListener = new LowLevelKeyboardListener();
+            keyboardListener.OnKeyPressed += KeyboardListener_OnKeyPressed;
+            keyboardListener.HookKeyboard();
+
+        }
+
+        private void KeyboardListener_OnKeyPressed(object sender, KeyPressedArgs e)
+        {
+            if (waitHotkey)
+            {
+                waitHotkey = false;
+                viewModel.Hotkey = $"Hotkey: {e.KeyPressed}";
+                Properties.Settings.Default.Hotkey = viewModel.Hotkey.ToString();
+                return;
+            }
+
+            if (e.KeyPressed == (Key)Enum.Parse(typeof(Key), viewModel.Hotkey.Remove(0, 8)))
+                Button_MainWindow_OverlaySwitch_Click(new object(), new RoutedEventArgs());
         }
 
         private void InitializeGUI()
@@ -67,21 +81,24 @@ namespace AnnoOverlay
 
         private void Button_MainWindow_OverlaySwitch_Click(object sender, RoutedEventArgs e)
         {
-            switch(mainOverlay.IsVisible)
+            switch (mainOverlay.IsVisible)
             {
                 case true:
                     mainOverlay.Hide();
                     viewModel.OverlayIsVisible = false;
+                    Properties.Settings.Default.MainOverlay_Visible = false;
                     break;
                 case false:
                     mainOverlay.Show();
                     viewModel.OverlayIsVisible = true;
+                    Properties.Settings.Default.MainOverlay_Visible = true;
                     break;
             }
         }
 
         private void Window_Closed(object sender, EventArgs e)
         {
+            keyboardListener.UnHookKeyboard();
             tokenSource.Cancel();
             Application.Current.Shutdown();
         }
@@ -89,6 +106,11 @@ namespace AnnoOverlay
         public static void CloseApplication()
         {
             Application.Current.Shutdown();
+        }
+
+        public void Dispose()
+        {
+            tokenSource.Dispose();
         }
     }
 }

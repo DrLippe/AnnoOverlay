@@ -132,6 +132,8 @@
       <DependentUpon>DevTools.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\IslandLinker.cs" />
+    <Compile Include="Helpers\LowLevelKeyboardListener.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="ViewModel\Factory.cs" />
     <Compile Include="Helpers\Converters.cs" />
     <Compile Include="Helpers\IslandReader.cs" />

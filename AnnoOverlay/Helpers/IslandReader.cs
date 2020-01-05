@@ -31,7 +31,7 @@ namespace AnnoOverlay.Helpers
 
             while (true)
             {
-                if (cancellationToken.WaitHandle.WaitOne(100))
+                if (cancellationToken.WaitHandle.WaitOne(1000))
                     break;
 
                 if (GameProcess != null)
@@ -47,7 +47,8 @@ namespace AnnoOverlay.Helpers
                         {
                             Application.Current.Dispatcher.BeginInvoke(
                               DispatcherPriority.Background,
-                              new Action(() => {
+                              new Action(() =>
+                              {
                                   MainWindow.closingWindow.Show();
                               }));
                         }
@@ -73,7 +74,7 @@ namespace AnnoOverlay.Helpers
 
         private void ReadMemory()
         {
-            while(GameProcess != null  && MainWindow.settings != null)
+            while (GameProcess != null && MainWindow.settings != null)
             {
                 if (GameProcess.HasExited)
                     break;
@@ -104,7 +105,8 @@ namespace AnnoOverlay.Helpers
             for (int i = 0; i < population.Length; i++)
                 population[i] = 0;
 
-            foreach (int guid in MainWindow.settings.GameAddresses.IslandPopulationPosPtr) {
+            foreach (int guid in MainWindow.settings.GameAddresses.IslandPopulationPosPtr)
+            {
                 // for each guid position
                 int thisGuid = BitConverter.ToInt32(islandPopulation, guid);
                 int[] array = Constants.populationGuids.Keys.ToArray();
@@ -146,10 +148,36 @@ namespace AnnoOverlay.Helpers
 
         private void Calculate()
         {
+            // Get a deep clone of Products[] to stop flickering
+            List<Product> productList = new List<Product>();
+
             foreach (Product product in MainWindow.viewModel.Parameters.Products)
             {
-                product.Amount = 0;
+                productList.Add(new Product()
+                {
+                    Name = product.Name,
+                    Amount = 0,
+                    Guid = product.Guid,
+                    Icon = product.Icon,
+                    Producers = product.Producers
+                });
             }
+
+            Product[] products = productList.ToArray();
+
+            foreach (Product product in products)
+            {
+                Dictionary<int, int> islandFactories;
+                int produced;
+
+                product.Amount = 0;
+
+                if (MainWindow.viewModel.IslandFactoryCount.TryGetValue(MainWindow.viewModel.ActiveIslandId, out islandFactories))
+                    if (islandFactories.TryGetValue(product.Guid, out produced))
+                        product.Amount = -(double)produced;
+            }
+
+            Factory[] factories = MainWindow.viewModel.Parameters.Factories;
 
             foreach (PopulationLevel populationLevel in MainWindow.viewModel.Parameters.PopulationLevels)
             {
@@ -158,12 +186,14 @@ namespace AnnoOverlay.Helpers
                     if (need.Tpmin == null)
                         continue;
 
-                    Product product = Array.Find(MainWindow.viewModel.Parameters.Products, (p) => p.Guid == need.Guid);
-                    Factory producer = Array.Find(MainWindow.viewModel.Parameters.Factories, (f) => f.Guid == product.Producers[0]);
+                    Product product = Array.Find(products, (p) => p.Guid == need.Guid);
+                    Factory producer = Array.Find(factories, (f) => f.Guid == product.Producers[0]);
 
-                    product.Amount += populationLevel.Amount * (double)need.Tpmin / (double)producer.Tpmin;
+                    product.Amount += (populationLevel.Amount * (double)need.Tpmin / (double)producer.Tpmin);
                 }
             }
+
+            MainWindow.viewModel.Parameters.Products = products;
         }
     }
 }

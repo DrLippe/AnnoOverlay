@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Xml.Serialization;
 
 namespace AnnoOverlay
@@ -32,6 +28,7 @@ namespace AnnoOverlay
         {
             MainWindow.viewModel.IslandLinks = new Dictionary<int, int>();
             MainWindow.viewModel.IslandLinksByZone = new Dictionary<int, int>[IslandLinkOffsets.Length];
+            MainWindow.viewModel.IslandFactoryCount = new Dictionary<int, Dictionary<int, int>>();
 
             foreach (int offset in IslandLinkOffsets)
             {
@@ -58,8 +55,9 @@ namespace AnnoOverlay
                 MainWindow.viewModel.IslandLinks.Remove(item.Key);
 
             // set new islandLinkOffset
-            int offset = Array.Find(MainWindow.viewModel.Settings.IslandLinkOffsets,i => i.ToString("X").Remove(0, 3) == MainWindow.viewModel.ActiveIslandId.ToString("X").Remove(0, 3));
-            MainWindow.viewModel.IslandLinksByZone[Array.IndexOf(IslandLinkOffsets, offset)] = new Dictionary<int, int>();
+            int offset = Array.Find(MainWindow.viewModel.Settings.IslandLinkOffsets, i => i.ToString("X").Remove(0, 3) == MainWindow.viewModel.ActiveIslandId.ToString("X").Remove(0, 3));
+            int index = Array.IndexOf(IslandLinkOffsets, offset);
+            MainWindow.viewModel.IslandLinksByZone[index] = new Dictionary<int, int>();
 
             // create new links
             for (int i = -60; i < 60; i++)
@@ -77,7 +75,7 @@ namespace AnnoOverlay
                     break;
 
                 MainWindow.viewModel.IslandLinks.Add(offset + (i * 64), 0x108 + (i * 16));
-                MainWindow.viewModel.IslandLinksByZone[Array.IndexOf(IslandLinkOffsets, offset)].Add(offset + (i * 64), 0x108 + (i * 16));
+                MainWindow.viewModel.IslandLinksByZone[index].Add(offset + (i * 64), 0x108 + (i * 16));
             }
         }
 
