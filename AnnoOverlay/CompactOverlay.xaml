@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnnoOverlay" xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Anno 1800 Overlay" ShowInTaskbar="False" Height="200" Width="220" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown" Cursor="Resources/annoCursor.ani" Closing="Window_Closing">
+        Title="Anno 1800 Overlay" ShowInTaskbar="False" Height="400" Width="400" Background="{x:Null}" AllowsTransparency="True" WindowStyle="None" Topmost="True" MouseDown="Window_MouseDown" Cursor="Resources/annoCursor.ani" Closing="Window_Closing">
     <Window.Resources>
         <local:DoubleToVisibilityConverter x:Key="ToVisibility" />
         <local:DoubleToPercentageConverter x:Key="ToPercent" />

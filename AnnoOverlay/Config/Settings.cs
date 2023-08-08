@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Xml.Serialization;
 
 namespace AnnoOverlay
@@ -50,12 +51,15 @@ namespace AnnoOverlay
         /// </summary>
         public void MapIslands(int selectedId)
         {
+            var links = MainWindow.viewModel.IslandLinks;
+
             // remove all links of this session
             foreach (var item in MainWindow.viewModel.IslandLinks.Where(keyValuePair => keyValuePair.Key.ToString("X").Remove(0, 3) == MainWindow.viewModel.ActiveIslandId.ToString("X").Remove(0, 3)).ToList())
                 MainWindow.viewModel.IslandLinks.Remove(item.Key);
 
             // set new islandLinkOffset
-            int offset = Array.Find(MainWindow.viewModel.Settings.IslandLinkOffsets, i => i.ToString("X").Remove(0, 3) == MainWindow.viewModel.ActiveIslandId.ToString("X").Remove(0, 3));
+            int offset = Array.Find(MainWindow.viewModel.Settings.IslandLinkOffsets, i => 
+                i.ToString("X").Remove(0, 3) == MainWindow.viewModel.ActiveIslandId.ToString("X").Remove(0, 3));
             int index = Array.IndexOf(IslandLinkOffsets, offset);
             MainWindow.viewModel.IslandLinksByZone[index] = new Dictionary<int, int>();
 
@@ -77,6 +81,47 @@ namespace AnnoOverlay
                 MainWindow.viewModel.IslandLinks.Add(offset + (i * 64), 0x108 + (i * 16));
                 MainWindow.viewModel.IslandLinksByZone[index].Add(offset + (i * 64), 0x108 + (i * 16));
             }
+        }
+
+        public void MapIslands(int offset, int islandId)
+        {
+            foreach (var item in MainWindow.viewModel.IslandLinks.Where(keyValuePair => keyValuePair.Key.ToString("X").Remove(0, 3) == MainWindow.viewModel.ActiveIslandId.ToString("X").Remove(0, 3)).ToList())
+                MainWindow.viewModel.IslandLinks.Remove(item.Key);
+
+            // zone offsets
+            // alte welt = 0
+            // neue welt = 1
+            // kap = 2
+            // arktis = 3
+            // enbesa = 4
+
+            var zoneOffset = Array.Find(MainWindow.viewModel.Settings.IslandLinkOffsets, i => i.ToString("X").Remove(0, 3) == islandId.ToString("X").Remove(0, 3));
+            int zoneIndex = Array.IndexOf(IslandLinkOffsets, zoneOffset);
+            MainWindow.viewModel.IslandLinksByZone[zoneIndex] = new Dictionary<int, int>();
+
+            while (offset > 0x108)
+            {
+                offset -= 0x10;
+                islandId -= 0x40;
+            }
+
+            while (offset < 0x608)
+            {
+                if (zoneIndex == 4 && offset == 0x2B8)
+                {
+                    MainWindow.viewModel.IslandLinks.Add(16771, offset);
+                    MainWindow.viewModel.IslandLinksByZone[4].Add(16771, offset);
+                }
+                else
+                {
+                    MainWindow.viewModel.IslandLinks.Add(islandId, offset);
+                    MainWindow.viewModel.IslandLinksByZone[zoneIndex].Add(islandId, offset);
+                }
+
+                offset += 0x10;
+                islandId += 0x40;
+            }
+
         }
 
         /// <summary>

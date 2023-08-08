@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -308,6 +308,203 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_114329.png" />
+    <Resource Include="Resources\icon_114330.png" />
+    <Resource Include="Resources\icon_118745.png" />
+    <Resource Include="Resources\icon_5403.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_601379.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_114356.png" />
+    <Resource Include="Resources\icon_114357.png" />
+    <Resource Include="Resources\icon_114358.png" />
+    <Resource Include="Resources\icon_114359.png" />
+    <Resource Include="Resources\icon_114364.png" />
+    <Resource Include="Resources\icon_114365.png" />
+    <Resource Include="Resources\icon_114367.png" />
+    <Resource Include="Resources\icon_114368.png" />
+    <Resource Include="Resources\icon_114369.png" />
+    <Resource Include="Resources\icon_114370.png" />
+    <Resource Include="Resources\icon_114371.png" />
+    <Resource Include="Resources\icon_114390.png" />
+    <Resource Include="Resources\icon_114391.png" />
+    <Resource Include="Resources\icon_114401.png" />
+    <Resource Include="Resources\icon_114402.png" />
+    <Resource Include="Resources\icon_114404.png" />
+    <Resource Include="Resources\icon_114408.png" />
+    <Resource Include="Resources\icon_114410.png" />
+    <Resource Include="Resources\icon_114414.png" />
+    <Resource Include="Resources\icon_114428.png" />
+    <Resource Include="Resources\icon_114430.png" />
+    <Resource Include="Resources\icon_114431.png" />
+    <Resource Include="Resources\icon_117698.png" />
+    <Resource Include="Resources\icon_117699.png" />
+    <Resource Include="Resources\icon_117701.png" />
+    <Resource Include="Resources\icon_117702.png" />
+    <Resource Include="Resources\icon_118724.png" />
+    <Resource Include="Resources\icon_118728.png" />
+    <Resource Include="Resources\icon_133093.png" />
+    <Resource Include="Resources\icon_133095.png" />
+    <Resource Include="Resources\icon_133097.png" />
+    <Resource Include="Resources\icon_133181.png" />
+    <Resource Include="Resources\icon_133183.png" />
+    <Resource Include="Resources\icon_133185.png" />
+    <Resource Include="Resources\icon_133532.png" />
+    <Resource Include="Resources\icon_134616.png" />
+    <Resource Include="Resources\icon_134623.png" />
+    <Resource Include="Resources\icon_135086.png" />
+    <Resource Include="Resources\icon_135087.png" />
+    <Resource Include="Resources\icon_135129.png" />
+    <Resource Include="Resources\icon_135130.png" />
+    <Resource Include="Resources\icon_135150.png" />
+    <Resource Include="Resources\icon_135186.png" />
+    <Resource Include="Resources\icon_135229.png" />
+    <Resource Include="Resources\icon_135230.png" />
+    <Resource Include="Resources\icon_135231.png" />
+    <Resource Include="Resources\icon_135232.png" />
+    <Resource Include="Resources\icon_135233.png" />
+    <Resource Include="Resources\icon_135234.png" />
+    <Resource Include="Resources\icon_1414.png" />
+    <Resource Include="Resources\icon_24807.png" />
+    <Resource Include="Resources\icon_24808.png" />
+    <Resource Include="Resources\icon_25131.png" />
+    <Resource Include="Resources\icon_2524.png" />
+    <Resource Include="Resources\icon_25506.png" />
+    <Resource Include="Resources\icon_25546.png" />
+    <Resource Include="Resources\icon_4267.png" />
+    <Resource Include="Resources\icon_4268.png" />
+    <Resource Include="Resources\icon_535.png" />
+    <Resource Include="Resources\icon_536.png" />
+    <Resource Include="Resources\icon_5380.png" />
+    <Resource Include="Resources\icon_5381.png" />
+    <Resource Include="Resources\icon_5382.png" />
+    <Resource Include="Resources\icon_5383.png" />
+    <Resource Include="Resources\icon_5384.png" />
+    <Resource Include="Resources\icon_5385.png" />
+    <Resource Include="Resources\icon_5386.png" />
+    <Resource Include="Resources\icon_5387.png" />
+    <Resource Include="Resources\icon_5388.png" />
+    <Resource Include="Resources\icon_5389.png" />
+    <Resource Include="Resources\icon_5390.png" />
+    <Resource Include="Resources\icon_5391.png" />
+    <Resource Include="Resources\icon_5392.png" />
+    <Resource Include="Resources\icon_5393.png" />
+    <Resource Include="Resources\icon_5394.png" />
+    <Resource Include="Resources\icon_5395.png" />
+    <Resource Include="Resources\icon_5397.png" />
+    <Resource Include="Resources\icon_5398.png" />
+    <Resource Include="Resources\icon_5399.png" />
+    <Resource Include="Resources\icon_5400.png" />
+    <Resource Include="Resources\icon_5401.png" />
+    <Resource Include="Resources\icon_5803.png" />
+    <Resource Include="Resources\icon_5830.png" />
+    <Resource Include="Resources\icon_5831.png" />
+    <Resource Include="Resources\icon_6261.png" />
+    <Resource Include="Resources\icon_6262.png" />
+    <Resource Include="Resources\icon_6263.png" />
+    <Resource Include="Resources\icon_6265.png" />
+    <Resource Include="Resources\icon_6280.png" />
+    <Resource Include="Resources\icon_6360.png" />
+    <Resource Include="Resources\icon_6600.png" />
+    <Resource Include="Resources\icon_836.png" />
+    <Resource Include="Resources\icon_838.png" />
+    <Resource Include="Resources\icon_840.png" />
+    <Resource Include="Resources\icon_846.png" />
+    <Resource Include="Resources\icon_847.png" />
+    <Resource Include="Resources\icon_848.png" />
+    <Resource Include="Resources\icon_849.png" />
+    <Resource Include="Resources\icon_850.png" />
+    <Resource Include="Resources\icon_917.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_1010192.png" />
+    <Resource Include="Resources\icon_1010193.png" />
+    <Resource Include="Resources\icon_1010194.png" />
+    <Resource Include="Resources\icon_1010195.png" />
+    <Resource Include="Resources\icon_1010196.png" />
+    <Resource Include="Resources\icon_1010197.png" />
+    <Resource Include="Resources\icon_1010198.png" />
+    <Resource Include="Resources\icon_1010199.png" />
+    <Resource Include="Resources\icon_1010201.png" />
+    <Resource Include="Resources\icon_1010202.png" />
+    <Resource Include="Resources\icon_1010204.png" />
+    <Resource Include="Resources\icon_1010205.png" />
+    <Resource Include="Resources\icon_1010207.png" />
+    <Resource Include="Resources\icon_1010209.png" />
+    <Resource Include="Resources\icon_1010210.png" />
+    <Resource Include="Resources\icon_1010215.png" />
+    <Resource Include="Resources\icon_1010219.png" />
+    <Resource Include="Resources\icon_1010221.png" />
+    <Resource Include="Resources\icon_1010222.png" />
+    <Resource Include="Resources\icon_1010223.png" />
+    <Resource Include="Resources\icon_1010224.png" />
+    <Resource Include="Resources\icon_1010226.png" />
+    <Resource Include="Resources\icon_1010227.png" />
+    <Resource Include="Resources\icon_1010228.png" />
+    <Resource Include="Resources\icon_1010229.png" />
+    <Resource Include="Resources\icon_1010230.png" />
+    <Resource Include="Resources\icon_1010231.png" />
+    <Resource Include="Resources\icon_1010232.png" />
+    <Resource Include="Resources\icon_1010233.png" />
+    <Resource Include="Resources\icon_1010234.png" />
+    <Resource Include="Resources\icon_1010235.png" />
+    <Resource Include="Resources\icon_1010239.png" />
+    <Resource Include="Resources\icon_1010241.png" />
+    <Resource Include="Resources\icon_1010242.png" />
+    <Resource Include="Resources\icon_1010243.png" />
+    <Resource Include="Resources\icon_1010249.png" />
+    <Resource Include="Resources\icon_1010251.png" />
+    <Resource Include="Resources\icon_1010252.png" />
+    <Resource Include="Resources\icon_1010253.png" />
+    <Resource Include="Resources\icon_1010254.png" />
+    <Resource Include="Resources\icon_1010255.png" />
+    <Resource Include="Resources\icon_1010256.png" />
+    <Resource Include="Resources\icon_1010566.png" />
+    <Resource Include="Resources\icon_103866.png" />
+    <Resource Include="Resources\icon_112694.png" />
+    <Resource Include="Resources\icon_112696.png" />
+    <Resource Include="Resources\icon_112697.png" />
+    <Resource Include="Resources\icon_112698.png" />
+    <Resource Include="Resources\icon_112699.png" />
+    <Resource Include="Resources\icon_112704.png" />
+    <Resource Include="Resources\icon_112706.png" />
+    <Resource Include="Resources\icon_120008.png" />
+    <Resource Include="Resources\icon_120014.png" />
+    <Resource Include="Resources\icon_120021.png" />
+    <Resource Include="Resources\icon_120031.png" />
+    <Resource Include="Resources\icon_120034.png" />
+    <Resource Include="Resources\icon_120036.png" />
+    <Resource Include="Resources\icon_120041.png" />
+    <Resource Include="Resources\icon_120042.png" />
+    <Resource Include="Resources\icon_120044.png" />
+    <Resource Include="Resources\icon_135816.png" />
+    <Resource Include="Resources\icon_135876.png" />
+    <Resource Include="Resources\icon_135877.png" />
+    <Resource Include="Resources\icon_135878.png" />
+    <Resource Include="Resources\icon_135879.png" />
+    <Resource Include="Resources\icon_135880.png" />
+    <Resource Include="Resources\icon_135881.png" />
+    <Resource Include="Resources\icon_135882.png" />
+    <Resource Include="Resources\icon_135883.png" />
+    <Resource Include="Resources\icon_135884.png" />
+    <Resource Include="Resources\icon_135885.png" />
+    <Resource Include="Resources\icon_135886.png" />
+    <Resource Include="Resources\icon_135887.png" />
+    <Resource Include="Resources\icon_135888.png" />
+    <Resource Include="Resources\icon_135889.png" />
+    <Resource Include="Resources\icon_24824.png" />
+    <Resource Include="Resources\icon_24863.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon_1010211.png" />
+    <Resource Include="Resources\icon_1010218.png" />
+    <Resource Include="Resources\icon_1010236.png" />
+    <Resource Include="Resources\icon_1010240.png" />
+    <Resource Include="Resources\icon_112695.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.6.0.5\build\Fody.targets" Condition="Exists('..\packages\Fody.6.0.5\build\Fody.targets')" />

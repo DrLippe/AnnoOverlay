@@ -102,8 +102,10 @@ namespace AnnoOverlay
 
         private void ListBox_Islands_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var listBox = (ListBox)sender;
+
             // Get selected island in list and early opt out
-            if ((ListBox_Islands.SelectedItems.Count != 1 && MainWindow.viewModel.ActiveIslandId == 0) || ListBox_Islands.Items.Count < 1)
+            if (e.AddedItems.Count != 1 || MainWindow.viewModel.ActiveIslandId == 0 || listBox.Items.Count < 1)
                 return;
 
             Button_RelinkIslands.Content = "Neu zuordnen";
@@ -111,7 +113,10 @@ namespace AnnoOverlay
             StackPanel_HowTo.Visibility = Visibility.Visible;
             tokenSource.Cancel();
 
-            MainWindow.settings.MapIslands(((Island)((ListBox)e.Source).Items[0]).Offset);
+            var selectedItem = e.AddedItems[0] as Island;
+
+            // MainWindow.settings.MapIslands(((Island)((ListBox)e.Source).Items[0]).Offset);
+            MainWindow.settings.MapIslands(selectedItem.Offset, MainWindow.viewModel.ActiveIslandId);
         }
 
         private void Button_CompactOverlay_Click(object sender, RoutedEventArgs e)
@@ -173,6 +178,7 @@ namespace AnnoOverlay
 
         public void Dispose()
         {
+            tokenSource.Cancel();
             tokenSource.Dispose();
         }
     }

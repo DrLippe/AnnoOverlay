@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -89,7 +91,8 @@ namespace AnnoOverlay
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return new BitmapImage(new Uri(String.Format(@"/Resources/icon_{0}.png", value), UriKind.Relative));
+            var uri = new Uri(String.Format(@"/Resources/icon_{0}.png", value), UriKind.Relative);
+            return new BitmapImage(uri);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

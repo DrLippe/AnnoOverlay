@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29306.81
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnnoOverlay", "AnnoOverlay\AnnoOverlay.csproj", "{76D18F0B-565E-4CA2-A429-4DE939B05853}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnnoOverlayUpdater", "AnnoOverlayUpdater\AnnoOverlayUpdater.csproj", "{9A475B63-C548-4BAC-A785-DCAD35E5C5E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Json2XmlParameters", "Json2XmlParameters\Json2XmlParameters.csproj", "{5112A962-2A0A-423E-AC93-30110C5204F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,14 @@ Global
 		{9A475B63-C548-4BAC-A785-DCAD35E5C5E0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A475B63-C548-4BAC-A785-DCAD35E5C5E0}.Release|x64.ActiveCfg = Release|Any CPU
 		{9A475B63-C548-4BAC-A785-DCAD35E5C5E0}.Release|x64.Build.0 = Release|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Debug|x64.Build.0 = Debug|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Release|x64.ActiveCfg = Release|Any CPU
+		{5112A962-2A0A-423E-AC93-30110C5204F2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

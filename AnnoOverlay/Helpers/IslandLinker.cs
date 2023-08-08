@@ -56,14 +56,20 @@ namespace AnnoOverlay
                 int[] offsets = (int[])MainWindow.settings.GameAddresses.IslandPopulationPointer.Clone();
 
                 int islandOffset = 0x108;
-                int inhabitantOffset = 0x04;
+                int inhabitantOffset = 0x08;
 
                 while (islandOffset < 0x608)
                 {
                     offsets[4] = islandOffset;
 
+                    // get size of population based on provided offsets
+                    var populationPosPtr = MainWindow.settings.GameAddresses.IslandPopulationPosPtr;
+                    int size = populationPosPtr[1];
+                    int lastPtr = populationPosPtr.Last();
+
+                    byte[] islandPopulation = new byte[lastPtr + size];
+
                     // get island population
-                    byte[] islandPopulation = new byte[92];
                     NativeMethods.ReadPointerPath(MainWindow.islandReader.GameProcess, offsets, ref islandPopulation);
 
                     Island island = new Island() { Offset = islandOffset };

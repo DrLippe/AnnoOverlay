@@ -96,10 +96,15 @@ namespace AnnoOverlay.Helpers
                 offsets[4] = MainWindow.viewModel.IslandLinks[islandId];
 
             // get island population
-            byte[] islandPopulation = new byte[100];
+            // get size of population based on provided offsets
+            var populationPosPtr = MainWindow.settings.GameAddresses.IslandPopulationPosPtr;
+            int size = populationPosPtr[1];
+            int lastPtr = populationPosPtr.Last();
+
+            byte[] islandPopulation = new byte[lastPtr + size];
             NativeMethods.ReadPointerPath(GameProcess, offsets, ref islandPopulation);
 
-            int inhabitantOffset = MainWindow.viewModel.UseFullHouse ? 0xC : 0x04;
+            int inhabitantOffset = MainWindow.viewModel.UseFullHouse ? 0x10 : 0x08;
 
             int[] population = new int[MainWindow.viewModel.Parameters.PopulationLevels.Length];
             for (int i = 0; i < population.Length; i++)
@@ -187,6 +192,9 @@ namespace AnnoOverlay.Helpers
                         continue;
 
                     Product product = Array.Find(products, (p) => p.Guid == need.Guid);
+                    if (product.Producers == null)
+                        continue;
+
                     Factory producer = Array.Find(factories, (f) => f.Guid == product.Producers[0]);
 
                     product.Amount += (populationLevel.Amount * (double)need.Tpmin / (double)producer.Tpmin);

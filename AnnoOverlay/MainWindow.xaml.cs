@@ -1,6 +1,7 @@
 ﻿using AnnoOverlay.Helpers;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -38,7 +39,9 @@ namespace AnnoOverlay
         public MainWindow()
         {
             // Run updater
-            Process.Start(System.IO.Path.Combine(Environment.CurrentDirectory, "AnnoOverlayUpdater.exe"));
+            var updaterPath = System.IO.Path.Combine(Environment.CurrentDirectory, "AnnoOverlayUpdater.exe");
+            if (File.Exists(updaterPath))
+                Process.Start(updaterPath);
 
             // Setting data context for windows
             DataContext = viewModel;
@@ -114,6 +117,7 @@ namespace AnnoOverlay
 
         public void Dispose()
         {
+            tokenSource.Cancel(false);
             tokenSource.Dispose();
         }
     }

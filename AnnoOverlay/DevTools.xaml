@@ -88,6 +88,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="31*"/>
@@ -98,11 +99,12 @@
                     <Label Grid.Column="1" Content="Kap Trelawney"/>
                     <Label Grid.Column="2" Content="Neue Welt"/>
                     <Label Grid.Column="3" Content="Arktis"/>
+                    <Label Grid.Column="4" Content="Land der Löwen"/>
 
                     <ListView Grid.Column="0" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[0]}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key, StringFormat={}{0:X}}" Header="Insel ID"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
                             </GridView>
                         </ListView.View>
@@ -110,7 +112,7 @@
                     <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[1]}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key, StringFormat={}{0:X}}" Header="Insel ID"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
                             </GridView>
                         </ListView.View>
@@ -118,7 +120,7 @@
                     <ListView Grid.Column="2" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[2]}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key, StringFormat={}{0:X}}" Header="Insel ID"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
                             </GridView>
                         </ListView.View>
@@ -126,7 +128,15 @@
                     <ListView Grid.Column="3" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[3]}">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Key}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key, StringFormat={}{0:X}}" Header="Insel ID"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <ListView Grid.Column="4" Grid.Row="1" ItemsSource="{Binding IslandLinksByZone[4]}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding Key, StringFormat={}{0:X}}" Header="Insel ID"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Value, StringFormat={}{0:X}}" Header="Insel Offset"/>
                             </GridView>
                         </ListView.View>
